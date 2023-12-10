@@ -1,0 +1,35 @@
+async function login(username, password) {
+  // Дефинирайте URL-а на "login" ендпойнта на вашия сървър
+  const loginUrl = "https://example.com/api/users/login";
+
+  // Дефинирайте данните, които искате да изпратите към сървъра
+  const data = {
+    username: username,
+    password: password
+  };
+
+  try {
+    const response = await fetch(loginUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Може да добавите и други необходими хедъри
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      // Ако заявката не е успешна, обработете грешката
+      const errorData = await response.json();
+      throw new Error(errorData.message);
+    }
+
+    // Ако заявката е успешна, вземете токена или други данни от отговора
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    // Обработете възникналата грешка
+    console.error("Грешка при логин:", error.message);
+    throw error;
+  }
+}
