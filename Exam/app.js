@@ -39,16 +39,7 @@ function renderer(template) {
     render(template, root);
 }
 
-function updateNav() {
-    const userData = userHelper.getUserData();
-    if (userData) {
-        userNav.style.display = 'block';
-        guestNav.style.display = 'none';
-    } else {
-        userNav.style.display = 'none';
-        guestNav.style.display = 'block';
-    }
-}
+
 
 function goTo(path) {
     page.redirect(path);
